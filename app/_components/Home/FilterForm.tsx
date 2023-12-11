@@ -28,7 +28,7 @@ export default function FilterForm() {
           rightSection={
             <ActionIcon size={32} radius='xl' color='transparent' type='submit'>
               <Image
-                src='/images/search-line.png'
+                src='/images/search.svg'
                 width={18}
                 height={18}
                 alt='Search'
