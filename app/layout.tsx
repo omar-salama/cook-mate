@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import { MantineProvider } from '@mantine/core';
 import './globals.css';
-import Header from './_components/Header';
+import Navbar from './_components/Navbar';
 
 export const metadata: Metadata = {
   title: 'CookMate',
@@ -25,8 +26,8 @@ export default function RootLayout({
       className={`${montserrat.variable} font-sans text-[#363636]`}
     >
       <body className='container mx-auto'>
-        <Header />
-        {children}
+        <Navbar />
+        <MantineProvider>{children}</MantineProvider>
       </body>
     </html>
   );

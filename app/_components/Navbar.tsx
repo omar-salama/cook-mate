@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function Header() {
+export default function Navbar() {
   return (
-    <div className='flex items-center justify-between my-6 sm:my-12'>
+    <div className='flex items-center justify-between mt-6 mb-12 sm:mb-14 sm:mt-16'>
       <Link href='/'>
         <Image
           src='/images/logo.svg'
