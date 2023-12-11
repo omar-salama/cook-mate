@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active-tab {
+  @apply bg-primary px-4 py-2 rounded-xl text-sm font-[500] me-2 text-white cursor-pointer;
+}
+
+.inactive-tab {
+  @apply bg-muted px-4 py-2 rounded-xl border text-sm font-[500] cursor-pointer;
+}
