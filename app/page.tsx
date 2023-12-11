@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Combobox, Input, InputBase, useCombobox } from '@mantine/core';
+import { Combobox, Grid, Input, InputBase, useCombobox } from '@mantine/core';
 import Image from 'next/image';
 import FilterForm from './_components/Home/FilterForm';
 import Tabs from './_components/Home/Tabs';
+import RecipeCard from './_components/Home/RecipeCard';
 
 export default function Home() {
-
   const tabs = [
     'All Recipes',
     'Arabian',
@@ -31,6 +31,17 @@ export default function Home() {
     </Combobox.Option>
   ));
 
+  // for testing
+  const data = [
+    { name: 'Classic Green Salad', time: '15' },
+    { name: 'Crunchy Nut Coleslaw', time: '15' },
+    { name: 'Shrimp Chicken Andouille Jambalaya', time: '15' },
+    { name: 'Barbecue Chicken Jollof Rice', time: '15' },
+    { name: 'Classic Green Salad', time: '15' },
+    { name: 'Crunchy Nut Coleslaw', time: '15' },
+    { name: 'Shrimp Chicken Andouille Jambalaya', time: '15' },
+    { name: 'Barbecue Chicken Jollof Rice', time: '15' },
+  ];
   return (
     <>
       {/* main header */}
@@ -80,6 +91,13 @@ export default function Home() {
       </section>
       {/* recipe cards */}
       <section className='mt-12'>
+        <Grid gutter={{ base: 15, xs: 25, md: 35, lg: 50 }}>
+          {data.map((recipe, idx) => (
+            <Grid.Col key={idx} span={{ base: 12, xs: 6, sm: 4, lg: 3 }}>
+              <RecipeCard recipe={recipe}></RecipeCard>
+            </Grid.Col>
+          ))}
+        </Grid>
       </section>
     </>
   );

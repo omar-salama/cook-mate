@@ -13,8 +13,9 @@ const config: Config = {
       },
       backgroundColor: {
         'primary': '#E36824',
-        'muted': '#FFFCF7',
         'secondary': '#5B7C75',
+        'muted': '#FFFCF7',
+        'gray': '#ECECEC',
       },
     },
   },
