@@ -8,14 +8,6 @@ import Tabs from './_components/Home/Tabs';
 import RecipeCard from './_components/Home/RecipeCard';
 
 export default function Home() {
-  const tabs = [
-    'All Recipes',
-    'Arabian',
-    'Asian',
-    'Italian',
-    'Indian',
-    'Chinese',
-  ];
 
   const filterCriteria = ['Newest', 'Most Popular', 'Highest Rated'];
 
@@ -61,7 +53,7 @@ export default function Home() {
       </section>
       {/* filteration */}
       <section className='mt-12 flex justify-between flex-wrap'>
-        <Tabs tabs={tabs}></Tabs>
+        <Tabs></Tabs>
         <Combobox
           store={combobox}
           onOptionSubmit={(val) => {
