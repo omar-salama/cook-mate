@@ -1,40 +1,42 @@
+import { ActionIcon, TextInput } from '@mantine/core';
 import { useFormik } from 'formik';
 import Image from 'next/image';
 
 export default function FilterForm() {
   const formik = useFormik({
     initialValues: {
-      recipe: '',
+      search: '',
     },
     onSubmit: (values) => {
-      console.log('Searching for:', values.recipe);
+      console.log('Searching for:', values.search);
       // Search logic here
     },
   });
 
   return (
     <>
-      <form className='flex items-center' onSubmit={formik.handleSubmit}>
-        <input
-          className='rounded-xl border px-6 py-3'
-          id='recipe'
-          name='recipe'
-          value={formik.values.recipe}
+      <form onSubmit={formik.handleSubmit}>
+        <TextInput
+          id='search'
+          name='search'
+          value={formik.values.search}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          radius='lg'
+          size='lg'
           placeholder='Search for new recipes'
-          size={28}
+          rightSection={
+            <ActionIcon size={32} radius='xl' color='transparent' type='submit'>
+              <Image
+                src='/images/search-line.png'
+                width={18}
+                height={18}
+                alt='Search'
+              />
+            </ActionIcon>
+          }
         />
-        <button type='submit'>
-          <Image
-            className='ms-3'
-            src='/images/search-line.png'
-            width={25}
-            height={25}
-            alt='Search'
-          />
-        </button>
-      </form>        
+      </form>
     </>
   );
 }
