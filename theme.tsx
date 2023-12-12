@@ -9,5 +9,8 @@ const montserrat = localFont({
 });
 
 export const theme = createTheme({
-  fontFamily: montserrat.style.fontFamily
+  fontFamily: montserrat.style.fontFamily,
+  colors: {
+    main: ['#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824']
+  }
 });
