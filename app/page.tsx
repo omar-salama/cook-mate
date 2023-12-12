@@ -70,7 +70,7 @@ export default function Home() {
         ></Image>
       </section>
       {/* filteration */}
-      <section className='mt-12 flex justify-between flex-wrap'>
+      <section className='mt-12 flex justify-between'>
         <Tabs></Tabs>
         <Combobox
           store={combobox}
@@ -90,11 +90,11 @@ export default function Home() {
               rightSectionPointerEvents='none'
               onClick={() => combobox.toggleDropdown()}
             >
-              {value || <Input.Placeholder>Filter By</Input.Placeholder>}
+              {value || <Input.Placeholder>Filter</Input.Placeholder>}
             </InputBase>
           </Combobox.Target>
 
-          <Combobox.Dropdown color='black'>
+          <Combobox.Dropdown>
             <Combobox.Options>{options}</Combobox.Options>
           </Combobox.Dropdown>
         </Combobox>

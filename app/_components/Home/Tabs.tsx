@@ -22,7 +22,7 @@ const RecipeList = () => {
           key={index}
           className={`${
             activeTab === tab ? 'active-tab' : 'inactive-tab'
-          } ${index < tabs.length - 1 ? 'me-2' : ''} cursor-pointer mt-3 md:mt-0 mb-3 md:mb-0`}
+          } ${index < tabs.length - 1 ? 'me-2' : ''} cursor-pointer mb-3 md:mb-0`}
           onClick={() => handleTabClick(tab)}
         >
           {tab}
