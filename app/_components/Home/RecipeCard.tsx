@@ -1,11 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-type Recipe = {
-  name: string;
-  time: string;
-};
-
-export default function RecipeCard({ recipe }: { recipe: Recipe }) {
+export default function RecipeCard({ recipe }: { recipe: IRecipe }) {  
   return (
     <div className='w-4/5 sm:w-full mx-auto'>
       <Image
@@ -32,17 +28,18 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
           >
             {recipe.name}
           </p>
+          <p>Time</p>
         </div>
         <div className='recipe-details flex items-center justify-between'>
-          <p className='font-bold'>{recipe.time} Mins</p>
-          <button className='bg-muted rounded-full p-1.5'>
+          <p className='font-bold'>15 Mins</p>
+          <Link className='bg-muted rounded-full p-1.5' href={`/recipe/${recipe.id}`}>
             <Image
               src='/images/bookmark.svg'
               width={25}
               height={25}
               alt='bookmark'
             />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,13 +1,22 @@
 'use client';
 
-import { useState } from 'react';
-import { Combobox, Grid, Input, InputBase, useCombobox } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import {
+  Combobox,
+  Grid,
+  Input,
+  InputBase,
+  Loader,
+  useCombobox,
+} from '@mantine/core';
 import Image from 'next/image';
 import FilterForm from './_components/Home/FilterForm';
 import Tabs from './_components/Home/Tabs';
 import RecipeCard from './_components/Home/RecipeCard';
+import { fetchRecipes } from '../utils/recipe';
 
 export default function Home() {
+  const [recipes, setRecipes] = useState<IRecipe[] | null>(null);
 
   const filterCriteria = ['Newest', 'Most Popular', 'Highest Rated'];
 
@@ -34,6 +43,15 @@ export default function Home() {
     { name: 'Shrimp Chicken Andouille Jambalaya', time: '15' },
     { name: 'Barbecue Chicken Jollof Rice', time: '15' },
   ];
+
+  useEffect(() => {
+    async function fetchRecipeData() {
+      const data = await fetchRecipes();
+      setRecipes(data);
+    }
+    fetchRecipeData();
+  }, []);
+
   return (
     <>
       {/* main header */}
@@ -84,11 +102,17 @@ export default function Home() {
       {/* recipe cards */}
       <section className='mt-12'>
         <Grid gutter={{ base: 15, xs: 25, md: 35, lg: 50 }}>
-          {data.map((recipe, idx) => (
-            <Grid.Col key={idx} span={{ base: 12, xs: 6, sm: 4, lg: 3 }}>
-              <RecipeCard recipe={recipe}></RecipeCard>
-            </Grid.Col>
-          ))}
+          {recipes === null ? (
+            <Loader color='main' className='mx-auto'></Loader>
+          ) : recipes.length === 0 ? (
+            <div>No Recipes Found</div>
+          ) : (
+            recipes.map((recipe, idx) => (
+              <Grid.Col key={idx} span={{ base: 12, xs: 6, sm: 4, lg: 3 }}>
+                <RecipeCard recipe={recipe}></RecipeCard>
+              </Grid.Col>
+            ))
+          )}
         </Grid>
       </section>
     </>
