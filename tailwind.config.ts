@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -9,16 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-montserrat)']
+        sans: ['var(--font-montserrat)'],
+      },
+      colors: {
+        primary: '#E36824',
       },
       backgroundColor: {
-        'primary': '#E36824',
-        'secondary': '#5B7C75',
-        'muted': '#FFFCF7',
-        'gray': '#ECECEC',
+        primary: '#E36824',
+        secondary: '#5B7C75',
+        muted: '#FFFCF7',
+        gray: '#ECECEC',
       },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;

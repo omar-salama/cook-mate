@@ -1,0 +1,13 @@
+.wrapper {
+  background-color: #FDEED9;
+  position: relative;
+  margin-bottom: rem(30px);
+  border-radius: 20px;
+}
+
+.dropzone {
+  border-width: rem(1px);
+  padding-bottom: rem(50px);
+  border: 1px black dashed;
+  border-radius: 20px;
+}
