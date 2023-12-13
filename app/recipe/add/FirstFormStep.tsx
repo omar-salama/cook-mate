@@ -118,12 +118,12 @@ const FirstFormStep: React.FC<
                   )
                 )}
                 <Grid.Col>
-                  <Button
+                  <button
                     className='bg-gray text-xs rounded-full py-1 px-20'
                     onClick={() => push('')}
                   >
                     Add New
-                  </Button>
+                  </button>
                 </Grid.Col>
               </>
             )}
