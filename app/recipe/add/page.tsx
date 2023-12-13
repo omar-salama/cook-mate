@@ -1,9 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import {
-  Formik,
-  Form,
-} from 'formik';
+import { useRouter } from 'next/navigation';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Container, Grid } from '@mantine/core';
 import FirstFormStep from './FirstFormStep';
@@ -19,6 +17,7 @@ const validationSchemaStep2 = Yup.object().shape({
 });
 
 const RecipeForm = () => {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [validationSchema, setValidationSchema] = useState<
     Yup.ObjectSchema<any, any>
@@ -53,23 +52,26 @@ const RecipeForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, actions) => {
+        onSubmit={async (values, actions) => {
           // Handle step 2 submission
           console.log(values, actions);
+          const res = await fetch(`/api/recipes`, {
+            body: JSON.stringify(values),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          });          
+          if (res.ok) router.push('/');
         }}
       >
         {(formik) => (
           <Form>
             {currentStep === 1 && (
-              <FirstFormStep
-                formik={formik}
-                isStepValid={handleNextStep}
-              />
+              <FirstFormStep formik={formik} isStepValid={handleNextStep} />
             )}
 
-            {currentStep === 2 && (
-              <SecondStepForm />
-            )}
+            {currentStep === 2 && <SecondStepForm />}
           </Form>
         )}
       </Formik>

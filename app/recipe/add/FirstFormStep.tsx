@@ -97,12 +97,12 @@ const FirstFormStep: React.FC<ChildProps & { formik: FormikProps<IRecipe> }> = (
                   )
                 )}
                 <Grid.Col>
-                  <button
+                  <Button
                     className='bg-gray text-xs rounded-full py-1 px-20'
                     onClick={() => push('')}
                   >
                     Add New
-                  </button>
+                  </Button>
                 </Grid.Col>
               </>
             )}
