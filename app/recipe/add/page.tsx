@@ -26,6 +26,7 @@ import { useRef } from 'react';
 import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
 import { IconCloudUpload, IconX, IconDownload } from '@tabler/icons-react';
 import classes from './DropzoneButton.module.css';
+import Image from 'next/image';
 
 const validationSchemaStep1 = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -68,6 +69,13 @@ const RecipeForm = () => {
 
   return (
     <Container fluid>
+      <Grid>
+        <Grid.Col span={{ base: 12, sm: 5.5 }}>
+          <h2 className='font-bold text-xl lg:text-4xl mb-10'>
+            Share Your Recipe with the CookMate Community!
+          </h2>
+        </Grid.Col>
+      </Grid>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -124,7 +132,7 @@ const RecipeForm = () => {
                     </Grid.Col>
                     <Grid.Col>
                       <h5 className='font-bold text-xl mt-5 mb-3'>
-                        Recipe Images
+                        Recipe Ingredients
                       </h5>
                     </Grid.Col>
                     <FieldArray name='ingredients'>
@@ -235,38 +243,70 @@ const RecipeForm = () => {
             )}
 
             {currentStep === 2 && (
-              <Grid>
-                <FieldArray name='steps'>
-                  {({ push, remove, form }) => (
-                    <>
-                      {form.values.steps.map((step: string, index: number) => (
-                        <Grid key={index}>
-                          <Grid.Col span={9}>
-                            <Field name={`steps.${index}`}>
-                              {({ field, meta }: FieldProps) => (
-                                <>
-                                  <Textarea
-                                    label={`Step ${index + 1}`}
-                                    id={field.name}
-                                    error={meta.touched && meta.error}
-                                    {...field}
-                                  />
-                                </>
-                              )}
-                            </Field>
-                          </Grid.Col>
-                          <Grid.Col span={3}>
-                            <Button onClick={() => remove(index)} color='red'>
-                              Remove
-                            </Button>
-                          </Grid.Col>
-                        </Grid>
-                      ))}
-                      <Button type='submit'>Save Recipe</Button>
-                      <Button onClick={() => push('')}>Add Step</Button>
-                    </>
-                  )}
-                </FieldArray>
+              <Grid justify='space-between'>
+                <Grid.Col span={{ base: 12, sm: 5.5 }}>
+                  <h5 className='font-bold text-xl text-primary'>
+                    Second Recipe Steps
+                  </h5>
+                  <FieldArray name='steps'>
+                    {({ push, remove, form }) => (
+                      <>
+                        {form.values.steps.map(
+                          (step: string, index: number) => (
+                            <Grid.Col key={index}>
+                              <Field name={`steps.${index}`}>
+                                {({ field, meta }: FieldProps) => (
+                                  <>
+                                    <Textarea
+                                      label={`Step ${index + 1}`}
+                                      radius={12}
+                                      autosize
+                                      minRows={4}
+                                      placeholder='Steps to make your recipe'
+                                      id={field.name}
+                                      error={meta.touched && meta.error}
+                                      {...field}
+                                    />
+                                  </>
+                                )}
+                              </Field>
+                            </Grid.Col>
+                          )
+                        )}
+                        <Grid.Col>
+                          <button
+                            className='bg-gray text-xs rounded-full py-1 px-20'
+                            onClick={() => push('')}
+                          >
+                            Add New
+                          </button>
+                        </Grid.Col>
+                      </>
+                    )}
+                  </FieldArray>
+                  <Grid.Col className='mt-6'>
+                    <Button
+                      rightSection={<IconArrowRight size={14} />}
+                      fullWidth
+                      radius={100}
+                      color='secondary'
+                      type='submit'
+                      onClick={() => goToNextStep(formik)}
+                    >
+                      Save
+                    </Button>
+                  </Grid.Col>
+                </Grid.Col>
+                <Grid.Col span={6}>
+                  <div className='flex justify-center'>
+                    <Image
+                      src='/images/chars.svg'
+                      width={300}
+                      height={300}
+                      alt='recipe'
+                    ></Image>
+                  </div>
+                </Grid.Col>
               </Grid>
             )}
           </Form>
