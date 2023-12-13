@@ -129,15 +129,13 @@ const FirstFormStep: React.FC<
             )}
           </FieldArray>
           <Grid.Col className='mt-6'>
-            <Button
-              rightSection={<IconArrowRight size={14} />}
-              fullWidth
-              radius={100}
+            <button
+              className='w-full rounded-full bg-secondary hoved:bg-secondary/[.9] text-white font-bold py-2'
               type='submit'
               onClick={() => checkStep(formik)}
             >
               Next
-            </Button>
+            </button>
           </Grid.Col>
         </Grid>
       </Grid.Col>
