@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Container, Grid } from '@mantine/core';
 import FirstFormStep from './FirstFormStep';
 import SecondStepForm from './SecondStepForm';
+import { createRecipe } from '@/utils/recipe';
 
 const validationSchemaStep1 = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -52,16 +53,8 @@ const RecipeForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={async (values, actions) => {
-          // Handle step 2 submission
-          console.log(values, actions);
-          const res = await fetch(`/api/recipes`, {
-            body: JSON.stringify(values),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            method: 'POST',
-          });          
+        onSubmit={async (values) => {
+          const res = await createRecipe(values);
           if (res.ok) router.push('/');
         }}
       >
