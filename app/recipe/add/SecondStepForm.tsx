@@ -47,7 +47,6 @@ const SecondStepForm = () => {
             rightSection={<IconArrowRight size={14} />}
             fullWidth
             radius={100}
-            color='secondary'
             type='submit'
           >
             Save
