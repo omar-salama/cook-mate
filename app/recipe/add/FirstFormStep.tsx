@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Field, FieldArray, FieldProps, FormikProps } from 'formik';
 import {
   Button,
@@ -9,11 +9,13 @@ import {
   Group,
   rem,
   useMantineTheme,
+  SimpleGrid,
 } from '@mantine/core';
 import { IconArrowRight, IconFileUpload } from '@tabler/icons-react';
-import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
+import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import { IconX, IconDownload } from '@tabler/icons-react';
 import classes from './DropzoneButton.module.css';
+import Image from 'next/image';
 
 type IsStepValidCallback = (dataFromChild: boolean) => void;
 
@@ -21,15 +23,34 @@ interface ChildProps {
   isStepValid: IsStepValidCallback;
 }
 
-const FirstFormStep: React.FC<ChildProps & { formik: FormikProps<IRecipe> }> = ({ formik, isStepValid }) => {
+const FirstFormStep: React.FC<
+  ChildProps & { formik: FormikProps<IRecipe> }
+> = ({ formik, isStepValid }) => {
   const openRef = useRef<() => void>(null);
   const theme = useMantineTheme();
 
-  const checkStep = async (formik: FormikProps<IRecipe>) => {
+  const checkStep = (formik: FormikProps<IRecipe>) => {
     const isInvalid = Object.keys(formik.errors).length > 0;
     // pass value to parent component
     isStepValid(!isInvalid && formik.dirty);
   };
+
+  const [files, setFiles] = useState<FileWithPath[]>([]);
+
+  const previews = files.map((file, index) => {
+    const imageUrl = URL.createObjectURL(file);
+    return (
+      <Image
+        key={index}
+        src={imageUrl}
+        width={150}
+        height={150}
+        onLoad={() => URL.revokeObjectURL(imageUrl)}
+        alt='image preview'
+      />
+    );
+  });
+
   return (
     <Grid justify='space-between'>
       <Grid.Col span={{ base: 12, sm: 5.5 }} order={{ base: 2, sm: 1 }}>
@@ -130,7 +151,7 @@ const FirstFormStep: React.FC<ChildProps & { formik: FormikProps<IRecipe> }> = (
             <div className={classes.wrapper}>
               <Dropzone
                 openRef={openRef}
-                onDrop={() => {}}
+                onDrop={setFiles}
                 className={classes.dropzone}
                 accept={[MIME_TYPES.png, MIME_TYPES.jpeg]}
                 maxSize={10 * 1024 ** 2}
@@ -168,6 +189,12 @@ const FirstFormStep: React.FC<ChildProps & { formik: FormikProps<IRecipe> }> = (
                 </div>
               </Dropzone>
             </div>
+            <SimpleGrid
+              cols={{ base: 1, sm: 4 }}
+              mt={previews.length > 0 ? 'xl' : 0}
+            >
+              {previews}
+            </SimpleGrid>
           </Grid.Col>
         </Grid>
       </Grid.Col>
