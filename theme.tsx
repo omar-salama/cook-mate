@@ -12,6 +12,6 @@ export const theme = createTheme({
   fontFamily: montserrat.style.fontFamily,
   colors: {
     main: ['#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824','#E36824'],
-    secondary: ['#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75'],
+    submain: ['#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75','#5B7C75'],
   }
 });
