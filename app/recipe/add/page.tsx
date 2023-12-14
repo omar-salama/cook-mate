@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, redirect } from 'next/navigation';
+import { useSession } from "next-auth/react";
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Container, Grid } from '@mantine/core';
@@ -18,6 +19,14 @@ const validationSchemaStep2 = Yup.object().shape({
 });
 
 const RecipeForm = () => {
+  // prevent access if not logged in
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/api/auth/signin");
+    },
+  });
+
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [validationSchema, setValidationSchema] = useState<
