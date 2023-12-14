@@ -153,10 +153,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mantine/core@^7.3.1", "@mantine/core@7.3.1":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@mantine/core/-/core-7.3.1.tgz"
-  integrity sha512-WIesapVzK1ERFcALuosaEPuODN/k/FGkryf2d12R7vsDmxmWqX6yNzPUoJDy6j20ueAkyyg4beJZ4PuZfCRW9Q==
+"@mantine/core@^7.3.2", "@mantine/core@7.3.2":
+  version "7.3.2"
+  resolved "https://registry.npmjs.org/@mantine/core/-/core-7.3.2.tgz"
+  integrity sha512-CwAuQogVLcLR7O9e1eOgi3gtk4XX6cnaqevAxzJJpIOIyCnHiQ3cEGINVXyUUjUUipBlvK3sqz3NPGJ2ekLFDQ==
   dependencies:
     "@floating-ui/react" "^0.24.8"
     clsx "2.0.0"
@@ -165,17 +165,17 @@
     react-textarea-autosize "8.5.3"
     type-fest "^3.13.1"
 
-"@mantine/dropzone@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-7.3.1.tgz"
-  integrity sha512-//KnClpU8JyFQBgIm2wLD6jvls1R7lsg5B69YOjX8x5cX1WlevnSg7DfxOkrrxni7DxsNLTDCpiaSFL97dNFTA==
+"@mantine/dropzone@^7.3.2":
+  version "7.3.2"
+  resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-7.3.2.tgz"
+  integrity sha512-SqeBARkfS/x8UkxTc8qup7oWF1NDXP2WsbzllsLpjnlH7A/MpNgEUHs/y6oUF0Sxnc3g5Z0cvzHlZpFiWDGCmg==
   dependencies:
     react-dropzone-esm "15.0.1"
 
-"@mantine/hooks@^7.3.1", "@mantine/hooks@7.3.1":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.3.1.tgz"
-  integrity sha512-pbbqPpVou/13xbt/dYYNphPpbDE2XfPN9mUHBoGZgv9FM8IkziNMIOo4PtNlqqqYsyp1lfQIQVKKT+DLZt1C8Q==
+"@mantine/hooks@^7.3.2", "@mantine/hooks@7.3.2":
+  version "7.3.2"
+  resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.3.2.tgz"
+  integrity sha512-xgumuuI3PBWXff5N02HCI7PEy25mDEdyXDQklUYK93J6FKwpcosyZnGVitoUrV1gLtYYa9ZudeAWdhHuh/CpOg==
 
 "@next-auth/prisma-adapter@^1.0.7":
   version "1.0.7"
@@ -2727,7 +2727,7 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
-ts-node@>=9.0.0:
+ts-node@^10.9.2, ts-node@>=9.0.0:
   version "10.9.2"
   resolved "https://registry.npmjs.org/ts-node/-/ts-node-10.9.2.tgz"
   integrity sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==
