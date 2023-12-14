@@ -2,14 +2,15 @@ import { Field, FieldArray, FieldProps } from 'formik';
 import { Button, Grid, Textarea } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
 import Image from 'next/image';
+import MainSubmitButton from '@/app/_components/MainSubmitButton';
 
-const SecondStepForm = () => {
+const SecondStepForm = ({ loading = false }) => {
   return (
     <Grid justify='space-between'>
       <Grid.Col span={{ base: 12, sm: 5.5 }}>
         <h5 className='font-bold text-xl text-primary'>Second Recipe Steps</h5>
         <FieldArray name='steps'>
-          {({ push, remove, form }) => (
+          {({ push, form }) => (
             <>
               {form.values.steps.map((step: string, index: number) => (
                 <Grid.Col key={index}>
@@ -43,12 +44,7 @@ const SecondStepForm = () => {
           )}
         </FieldArray>
         <Grid.Col className='mt-6'>
-          <button
-            className='w-full rounded-full bg-secondary hoved:bg-secondary/[.9] text-white font-bold py-2'
-            type='submit'
-          >
-            Save
-          </button>
+          <MainSubmitButton label='Save' loading={loading} />
         </Grid.Col>
       </Grid.Col>
       <Grid.Col span={6}>
