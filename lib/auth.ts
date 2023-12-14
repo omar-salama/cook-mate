@@ -28,7 +28,11 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        if (!user || !(await compare(credentials.password, user.password))) {
+        if (!user || !user.password) {
+          return null;
+        }
+
+        if (!(await compare(credentials.password, user.password))) {
           return null;
         }
 
@@ -42,7 +46,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     session: ({ session, token }) => {
-      console.log('Session Callback', { session, token });
       return {
         ...session,
         user: {
@@ -52,7 +55,6 @@ export const authOptions: NextAuthOptions = {
       };
     },
     jwt: ({ token, user }) => {
-      console.log('JWT Callback', { token, user });
       if (user) {
         const u = user as unknown as any;
         return {
