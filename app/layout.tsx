@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { MantineProvider } from '@mantine/core';
 import Navbar from './_components/Navbar';
 import { theme } from '../theme';
+import { NextAuthProvider } from './providers';
 
 export const metadata: Metadata = {
   title: 'CookMate',
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className='container mx-auto text-[#363636]'>
-        <Navbar />
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <NextAuthProvider>
+          <Navbar />
+          <MantineProvider theme={theme}>{children}</MantineProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
