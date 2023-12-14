@@ -1,8 +1,10 @@
 import { compare } from 'bcryptjs';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma as any),
   pages: {
     signIn: "/login",
   },
