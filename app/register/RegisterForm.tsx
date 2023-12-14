@@ -1,96 +1,166 @@
 'use client';
 
+import { useState } from 'react';
+import { Notification, TextInput } from '@mantine/core';
 import { signIn } from 'next-auth/react';
-import { ChangeEvent, useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Field, Form, Formik, FieldProps } from 'formik';
+import * as Yup from 'yup';
+import MainSubmitButton from '../_components/MainSubmitButton';
+import Link from 'next/link';
 
-export const RegisterForm = () => {
-  let [loading, setLoading] = useState(false);
-  let [formValues, setFormValues] = useState({
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email address').required('Required'),
+  password: Yup.string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Required'),
+  confirmPassword: Yup.string().required('Required'),
+});
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export default function RegisterFrom() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const callbackUrl = searchParams.get('callbackUrl') || '/recipe/add';
+
+  const initialValues: FormData = {
     name: '',
     email: '',
     password: '',
-  });
+    confirmPassword: '',
+  };
 
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
+  const handleSubmit = async (values: FormData) => {
     try {
+      setLoading(true);
+      setError('');
       const res = await fetch('/api/register', {
         method: 'POST',
-        body: JSON.stringify(formValues),
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
       setLoading(false);
+      console.log(res);
       if (!res.ok) {
-        alert((await res.json()).message);
+        setError((await res.json()).message);
         return;
       }
-
-      signIn(undefined, { callbackUrl: '/' });
+      await signIn('credentials', {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+        callbackUrl,
+      });
+      console.log('hehehehe');
+      router.push(callbackUrl);
     } catch (error: any) {
       setLoading(false);
-      console.error(error);
-      alert(error.message);
+      setError(error.message || 'An error occurred');
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
   return (
-    <form
-      onSubmit={onSubmit}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        width: 500,
-        rowGap: 10,
-      }}
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     >
-      <label htmlFor='name'>Name</label>
-      <input
-        required
-        type='text'
-        name='name'
-        value={formValues.name}
-        onChange={handleChange}
-        style={{ padding: '1rem' }}
-      />
-      <label htmlFor='email'>Email</label>
-      <input
-        required
-        type='email'
-        name='email'
-        value={formValues.email}
-        onChange={handleChange}
-        style={{ padding: '1rem' }}
-      />
-      <label htmlFor='password'>Password</label>
-      <input
-        required
-        type='password'
-        name='password'
-        value={formValues.password}
-        onChange={handleChange}
-        style={{ padding: '1rem' }}
-      />
-      <button
-        style={{
-          backgroundColor: `${loading ? '#ccc' : '#3446eb'}`,
-          color: '#fff',
-          padding: '1rem',
-          cursor: 'pointer',
-        }}
-        disabled={loading}
-      >
-        {loading ? 'loading...' : 'Register'}
-      </button>
-    </form>
+      {({ values }) => (
+        <Form>
+          <div className='h-16 flex items-center w-full'>
+            {error && (
+              <Notification w='100%' color='red' radius={5} title={error} />
+            )}
+          </div>
+          <div className='mb-3'>
+            <Field name='name'>
+              {({ field, meta }: FieldProps) => (
+                <>
+                  <TextInput
+                    radius={17}
+                    error={meta.touched && meta.error}
+                    label='Name'
+                    placeholder='Type your name'
+                    {...field}
+                  />
+                </>
+              )}
+            </Field>
+          </div>
+          <div className='mb-3'>
+            <Field name='email'>
+              {({ field, meta }: FieldProps) => (
+                <>
+                  <TextInput
+                    radius={17}
+                    error={meta.touched && meta.error}
+                    label='Email Address'
+                    placeholder='Type your email address'
+                    {...field}
+                  />
+                </>
+              )}
+            </Field>
+          </div>
+          <div className='mb-3'>
+            <Field name='password'>
+              {({ field, meta }: FieldProps) => (
+                <>
+                  <TextInput
+                    radius={17}
+                    error={meta.touched && meta.error}
+                    type='password'
+                    label='Password'
+                    placeholder='***********'
+                    {...field}
+                  />
+                </>
+              )}
+            </Field>
+          </div>
+          <div className='mb-3'>
+            <Field
+              name='confirmPassword'
+              validate={(value: string) => {
+                if (value !== values.password) {
+                  return 'Password doesn\'t match';
+                }
+              }}
+            >
+              {({ field, meta }: FieldProps) => (
+                <>
+                  <TextInput
+                    radius={17}
+                    error={meta.touched && meta.error}
+                    type='password'
+                    label='Confirm Password'
+                    placeholder='***********'
+                    {...field}
+                  />
+                </>
+              )}
+            </Field>
+          </div>
+          <div className='mb-3 font-medium'>
+            <Link href='/login'>Already have an account?</Link>
+          </div>
+          <MainSubmitButton label='JOIN US' loading={loading} />
+        </Form>
+      )}
+    </Formik>
   );
-};
+}
