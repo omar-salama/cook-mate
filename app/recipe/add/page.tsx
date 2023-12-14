@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter, redirect } from 'next/navigation';
-import { useSession } from "next-auth/react";
+import { useSession } from 'next-auth/react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { Container, Grid } from '@mantine/core';
@@ -23,7 +23,7 @@ const RecipeForm = () => {
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/api/auth/signin");
+      redirect('/api/auth/signin');
     },
   });
 
@@ -51,7 +51,7 @@ const RecipeForm = () => {
   };
 
   return (
-    <Container fluid>
+    <>
       <Grid>
         <Grid.Col span={{ base: 12, sm: 5.5 }}>
           <h2 className='font-bold text-xl lg:text-4xl mb-10'>
@@ -77,7 +77,7 @@ const RecipeForm = () => {
           </Form>
         )}
       </Formik>
-    </Container>
+    </>
   );
 };
 

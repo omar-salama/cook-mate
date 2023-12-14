@@ -1,7 +1,7 @@
 import './globals.css';
 import '@mantine/core/styles.css';
 import type { Metadata } from 'next';
-import { MantineProvider } from '@mantine/core';
+import { Container, MantineProvider } from '@mantine/core';
 import Navbar from './_components/Navbar';
 import { theme } from '../theme';
 import { NextAuthProvider } from './providers';
@@ -19,10 +19,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className='container mx-auto text-[#363636]'>
+      <body className='text-[#363636]'>
         <NextAuthProvider>
-          <Navbar />
-          <MantineProvider theme={theme}>{children}</MantineProvider>
+          <MantineProvider theme={theme}>
+            <Container size='xl'>
+              <Navbar />
+              {children}
+            </Container>
+          </MantineProvider>
         </NextAuthProvider>
       </body>
     </html>
