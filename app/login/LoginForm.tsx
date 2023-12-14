@@ -35,7 +35,7 @@ export const LoginForm = () => {
     try {
       setError('');
       setLoading(true);
-      const res = await signIn('credentials', {
+      const res = await signIn('email-login', {
         redirect: false,
         email: values.email,
         password: values.password,

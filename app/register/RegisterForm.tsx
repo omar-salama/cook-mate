@@ -59,7 +59,7 @@ export default function RegisterFrom() {
         setError((await res.json()).message);
         return;
       }
-      await signIn('credentials', {
+      await signIn('email-login', {
         redirect: false,
         email: values.email,
         password: values.password,
