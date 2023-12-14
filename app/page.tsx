@@ -14,6 +14,7 @@ import FilterForm from './_components/Home/FilterForm';
 import Tabs from './_components/Home/Tabs';
 import RecipeCard from './_components/Home/RecipeCard';
 import { fetchRecipes } from '../utils/recipe';
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const [recipes, setRecipes] = useState<IRecipe[] | null>(null);
@@ -43,6 +44,8 @@ export default function Home() {
     { name: 'Shrimp Chicken Andouille Jambalaya', time: '15' },
     { name: 'Barbecue Chicken Jollof Rice', time: '15' },
   ];
+  const { data: session } = useSession();
+
 
   useEffect(() => {
     async function fetchRecipeData() {
@@ -57,7 +60,7 @@ export default function Home() {
       {/* main header */}
       <section className='flex flex-col sm:flex-row items-center justify-between text-center sm:text-start'>
         <div>
-          <p className='text-4xl font-bold'>Hello, Omar</p>
+          <p className='text-4xl font-bold'>Hello, {session?.user?.name}</p>
           <p className='text-xl mb-6 mt-2'>What are you cooking today?</p>
           <FilterForm />
         </div>
