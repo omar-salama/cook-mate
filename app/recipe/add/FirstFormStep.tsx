@@ -130,7 +130,7 @@ const FirstFormStep: React.FC<
           </FieldArray>
           <Grid.Col className='mt-6'>
             <button
-              className='w-full rounded-full bg-secondary hoved:bg-secondary/[.9] text-white font-bold py-2'
+              className='w-full rounded-full bg-secondary hover:bg-secondary/[.9] text-white font-bold py-2'
               type='submit'
               onClick={() => checkStep(formik)}
             >
