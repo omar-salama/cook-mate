@@ -8,6 +8,11 @@ const montserrat = localFont({
   variable: '--font-montserrat',
 });
 
+export const natasha = localFont({
+  src: '/public/fonts/natasha-walker/NatashawalkerBold-vmevO.otf',
+  variable: '--font-natasha',
+});
+
 export const theme = createTheme({
   fontFamily: montserrat.style.fontFamily,
   primaryColor: 'submain',
