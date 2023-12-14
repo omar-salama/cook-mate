@@ -7,6 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { Field, Form, Formik, FieldProps } from 'formik';
 import * as Yup from 'yup';
 import MainSubmitButton from '../_components/MainSubmitButton';
+import Link from 'next/link';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email address').required('Required'),
@@ -63,7 +64,9 @@ export const LoginForm = () => {
       {() => (
         <Form>
           <div className='h-16 flex items-center w-full'>
-            {error && <Notification w='100%' color='red' radius={5} title={error} />}
+            {error && (
+              <Notification w='100%' color='red' radius={5} title={error} />
+            )}
           </div>
           <div className='mb-3'>
             <Field name='email'>
@@ -80,7 +83,7 @@ export const LoginForm = () => {
               )}
             </Field>
           </div>
-          <div className='mb-6'>
+          <div className='mb-3'>
             <Field name='password'>
               {({ field, meta }: FieldProps) => (
                 <>
@@ -95,6 +98,9 @@ export const LoginForm = () => {
                 </>
               )}
             </Field>
+          </div>
+          <div className='mb-3 font-medium'>
+            <Link href='/register'>New to CookMate?</Link>
           </div>
           <MainSubmitButton label='SIGN IN NOW' loading={loading} />
         </Form>
