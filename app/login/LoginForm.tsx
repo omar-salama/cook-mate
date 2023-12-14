@@ -33,8 +33,8 @@ export const LoginForm = () => {
 
   const handleSubmit = async (values: FormData) => {
     try {
+      setError('');
       setLoading(true);
-
       const res = await signIn('credentials', {
         redirect: false,
         email: values.email,
