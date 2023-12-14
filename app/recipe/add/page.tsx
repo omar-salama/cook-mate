@@ -29,6 +29,7 @@ const RecipeForm = () => {
 
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [validationSchema, setValidationSchema] = useState<
     Yup.ObjectSchema<any, any>
   >(validationSchemaStep1);
@@ -63,8 +64,12 @@ const RecipeForm = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values) => {
+          setLoading(true);
           const res = await createRecipe(values);
-          if (res.ok) router.push('/');
+          if (res.ok) {
+            router.push('/');
+          }
+          setLoading(false);
         }}
       >
         {(formik) => (
@@ -72,8 +77,7 @@ const RecipeForm = () => {
             {currentStep === 1 && (
               <FirstFormStep formik={formik} isStepValid={handleNextStep} />
             )}
-
-            {currentStep === 2 && <SecondStepForm />}
+            {currentStep === 2 && <SecondStepForm loading={loading}/>}
           </Form>
         )}
       </Formik>
