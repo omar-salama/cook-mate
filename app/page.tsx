@@ -2,12 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import {
-  Combobox,
   Grid,
-  Input,
-  InputBase,
   Loader,
-  useCombobox,
 } from '@mantine/core';
 import Image from 'next/image';
 import FilterForm from './_components/Home/FilterForm';
@@ -18,34 +14,7 @@ import { useSession } from "next-auth/react";
 
 export default function Home() {
   const [recipes, setRecipes] = useState<IRecipe[] | null>(null);
-
-  const filterCriteria = ['Newest', 'Most Popular', 'Highest Rated'];
-
-  const combobox = useCombobox({
-    onDropdownClose: () => combobox.resetSelectedOption(),
-  });
-
-  const [value, setValue] = useState<string | null>(null);
-
-  const options = filterCriteria.map((item) => (
-    <Combobox.Option value={item} key={item}>
-      {item}
-    </Combobox.Option>
-  ));
-
-  // for testing
-  const data = [
-    { name: 'Classic Green Salad', time: '15' },
-    { name: 'Crunchy Nut Coleslaw', time: '15' },
-    { name: 'Shrimp Chicken Andouille Jambalaya', time: '15' },
-    { name: 'Barbecue Chicken Jollof Rice', time: '15' },
-    { name: 'Classic Green Salad', time: '15' },
-    { name: 'Crunchy Nut Coleslaw', time: '15' },
-    { name: 'Shrimp Chicken Andouille Jambalaya', time: '15' },
-    { name: 'Barbecue Chicken Jollof Rice', time: '15' },
-  ];
   const { data: session } = useSession();
-
 
   useEffect(() => {
     async function fetchRecipeData() {
@@ -75,32 +44,6 @@ export default function Home() {
       {/* filteration */}
       <section className='mt-12 flex justify-between'>
         <Tabs></Tabs>
-        <Combobox
-          store={combobox}
-          onOptionSubmit={(val) => {
-            setValue(val);
-            combobox.closeDropdown();
-          }}
-        >
-          <Combobox.Target>
-            <InputBase
-              component='button'
-              type='button'
-              pointer
-              radius='md'
-              size='md'
-              rightSection={<Combobox.Chevron />}
-              rightSectionPointerEvents='none'
-              onClick={() => combobox.toggleDropdown()}
-            >
-              {value || <Input.Placeholder>Filter</Input.Placeholder>}
-            </InputBase>
-          </Combobox.Target>
-
-          <Combobox.Dropdown>
-            <Combobox.Options>{options}</Combobox.Options>
-          </Combobox.Dropdown>
-        </Combobox>
       </section>
       {/* recipe cards */}
       <section className='mt-12'>
