@@ -4,7 +4,7 @@ import { useRouter, redirect } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { Container, Grid } from '@mantine/core';
+import { Grid } from '@mantine/core';
 import FirstFormStep from './FirstFormStep';
 import SecondStepForm from './SecondStepForm';
 import { createRecipe } from '@/utils/recipe';
@@ -20,13 +20,13 @@ const validationSchemaStep2 = Yup.object().shape({
 
 const RecipeForm = () => {
   // prevent access if not logged in
-  const { status } = useSession({
+  const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
       redirect('/api/auth/signin');
     },
   });
-
+  
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -65,7 +65,10 @@ const RecipeForm = () => {
         validationSchema={validationSchema}
         onSubmit={async (values) => {
           setLoading(true);
-          const res = await createRecipe(values);
+          const res = await createRecipe({
+            authorId: session?.user?.id,
+            ...values,
+          });
           if (res.ok) {
             router.push('/');
           }
@@ -77,7 +80,7 @@ const RecipeForm = () => {
             {currentStep === 1 && (
               <FirstFormStep formik={formik} isStepValid={handleNextStep} />
             )}
-            {currentStep === 2 && <SecondStepForm loading={loading}/>}
+            {currentStep === 2 && <SecondStepForm loading={loading} />}
           </Form>
         )}
       </Formik>

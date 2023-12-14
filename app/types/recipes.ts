@@ -4,4 +4,6 @@ type IRecipe = {
   description: string;
   steps: string[];
   ingredients: string[];
+  createdAt?: Date;
+  authorId?: String;
 };
