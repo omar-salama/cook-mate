@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Grid } from '@mantine/core';
+import { Grid } from '@mantine/core';
 import { LoginForm } from './LoginForm';
 import Image from 'next/image';
 import { natasha } from '@/theme';
