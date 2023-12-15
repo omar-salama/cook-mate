@@ -9,3 +9,7 @@
 .inactive-tab {
   @apply bg-muted px-4 py-2 rounded-xl border text-sm font-[500] cursor-pointer;
 }
+
+.orange-badge {
+  @apply bg-orangeMuted px-2 py-1 rounded-xl text-xs;
+}

@@ -19,6 +19,8 @@ const config: Config = {
         secondary: '#5B7C75',
         muted: '#FFFCF7',
         gray: '#ECECEC',
+        gray2: '#F4F4F4',
+        orangeMuted: '#E368241A',
       },
     },
   },
