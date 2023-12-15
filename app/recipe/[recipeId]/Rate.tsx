@@ -81,10 +81,17 @@ const Rate = ({
   return (
     <>
       <div
-        className='bg-muted rounded-3xl py-1 px-6 border border-black hover:bg-orangeMuted hover:cursor-pointer'
+        className='bg-muted rounded-3xl py-1 px-6 border border-black hover:bg-orangeMuted hover:cursor-pointer flex'
         onClick={openModel}
       >
-        Rate it!
+        Rate
+        <Image
+          src='/images/star.svg'
+          alt='star icon'
+          width={18}
+          height={18}
+          className='ms-1 color-primary'
+        />
       </div>
       <Modal
         opened={isOpen}
