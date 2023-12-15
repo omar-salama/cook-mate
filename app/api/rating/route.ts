@@ -7,7 +7,6 @@ export async function POST(req: Request) {
     userId: string;
     value: number;
   };
-  console.log(recipeId, userId, value);
   try {
     // Check if the user has already rated the recipe
     const existingRating = await prisma.rating.findUnique({
