@@ -44,6 +44,8 @@ const SearchComponent = () => {
   return (
     <div className='relative'>
       <TextInput
+        size='lg'
+        className='py-3'
         value={query}
         onChange={(e) => handleSearch(e.target.value)}
         placeholder='Search for recipes'
