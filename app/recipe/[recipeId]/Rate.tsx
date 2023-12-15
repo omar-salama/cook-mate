@@ -79,7 +79,7 @@ const Rate = ({
   };
 
   return (
-    <>
+    {session?.user?.id && <>
       <div
         className='bg-muted rounded-3xl py-1 px-6 border border-black hover:bg-orangeMuted hover:cursor-pointer flex'
         onClick={openModel}
@@ -117,7 +117,7 @@ const Rate = ({
           {loading && <Loader color='main' size='sm' />}
         </div>
       </Modal>
-    </>
+    </>}
   );
 };
 
