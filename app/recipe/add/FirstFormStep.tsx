@@ -23,13 +23,15 @@ interface ChildProps {
   isStepValid: IsStepValidCallback;
 }
 
+
+
 const FirstFormStep: React.FC<
-  ChildProps & { formik: FormikProps<IRecipe> }
+  ChildProps & { formik: FormikProps<IRecipeCreate> }
 > = ({ formik, isStepValid }) => {
   const openRef = useRef<() => void>(null);
   const theme = useMantineTheme();
 
-  const checkStep = (formik: FormikProps<IRecipe>) => {
+  const checkStep = (formik: FormikProps<IRecipeCreate>) => {
     const isInvalid = Object.keys(formik.errors).length > 0;
     // pass value to parent component
     isStepValid(!isInvalid && formik.dirty);

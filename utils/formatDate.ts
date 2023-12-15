@@ -1,9 +1,10 @@
-export default function formatDate(inputDate: Date): string {
+export default function formatDate(inputDate: string | undefined): string {
   const options: Intl.DateTimeFormatOptions = {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   };
-
-  return inputDate.toLocaleDateString('en-US', options);
+  if (!inputDate) return '';
+  const date = new Date(inputDate);
+  return date.toLocaleDateString('en-US', options);
 }

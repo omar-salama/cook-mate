@@ -1,26 +1,25 @@
+'use client';
+
 import formatDate from '@/utils/formatDate';
-import prisma from '@/lib/prisma';
 import Image from 'next/image';
 import Rating from '@/app/_components/Rating';
 import Rate from './Rate';
+import { useEffect, useState } from 'react';
+import { fetchRecipeDetails } from '@/utils/recipe';
 
-export default async function RecipeDetails({
+export default function RecipeDetails({
   params,
 }: {
   params: { recipeId: string };
 }) {
-  const recipe = await prisma.recipe.findUnique({
-    where: {
-      id: params.recipeId,
-    },
-    include: {
-      author: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+  const [recipe, setRecipe] = useState<IRecipe>();
+  useEffect(() => {
+    async function fetchRecipeData() {
+      const data = await fetchRecipeDetails(params.recipeId);
+      setRecipe(data);
+    }
+    fetchRecipeData();
+  }, [params.recipeId]);
 
   const images = [
     '/images/samosa.svg',
