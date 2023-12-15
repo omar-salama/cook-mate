@@ -11,7 +11,7 @@ import {
   useMantineTheme,
   SimpleGrid,
 } from '@mantine/core';
-import { IconArrowRight, IconFileUpload } from '@tabler/icons-react';
+import { IconFileUpload } from '@tabler/icons-react';
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import { IconX, IconDownload } from '@tabler/icons-react';
 import classes from './DropzoneButton.module.css';
