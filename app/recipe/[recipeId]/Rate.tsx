@@ -114,7 +114,7 @@ const Rate = ({
             readOnly={loading}
             value={userRating}
           />
-          {<Loader color='main' size='sm' />}
+          {loading && <Loader color='main' size='sm' />}
         </div>
       </Modal>
     </>
