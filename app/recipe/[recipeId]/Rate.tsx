@@ -1,7 +1,7 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
-import { Rating as MantineRating, Modal } from '@mantine/core';
+import { Loader, Rating as MantineRating, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 
@@ -104,15 +104,18 @@ const Rate = ({
         transitionProps={{ transition: 'rotate-left' }}
       >
         <h4 className='font-bold text-4xl'>{recipeName}</h4>
-        <MantineRating
-          size='xl'
-          className='my-4'
-          color='orange'
-          fractions={2}
-          onChange={handleRatingChange}
-          readOnly={loading}
-          value={userRating}
-        />
+        <div className='flex items-center my-4'>
+          <MantineRating
+            size='xl'
+            className='me-4'
+            color='orange'
+            fractions={2}
+            onChange={handleRatingChange}
+            readOnly={loading}
+            value={userRating}
+          />
+          {<Loader color='main' size='sm' />}
+        </div>
       </Modal>
     </>
   );
