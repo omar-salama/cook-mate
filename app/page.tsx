@@ -46,7 +46,7 @@ export default function Home() {
         <Tabs></Tabs>
       </section>
       {/* recipe cards */}
-      <section className='mt-12'>
+      <section className='mt-32'>
         <Grid gutter={{ base: 15, xs: 25, md: 35, lg: 50 }}>
           {recipes === null ? (
             <Loader color='main' className='mx-auto'></Loader>
