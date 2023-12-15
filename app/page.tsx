@@ -6,11 +6,11 @@ import {
   Loader,
 } from '@mantine/core';
 import Image from 'next/image';
-import FilterForm from './_components/Home/FilterForm';
 import Tabs from './_components/Home/Tabs';
 import RecipeCard from './_components/Home/RecipeCard';
 import { fetchRecipes } from '../utils/recipe';
 import { useSession } from "next-auth/react";
+import SearchComponent from './_components/Home/Search';
 
 export default function Home() {
   const [recipes, setRecipes] = useState<IRecipe[] | null>(null);
@@ -31,7 +31,7 @@ export default function Home() {
         <div>
           <p className='text-4xl font-bold'>Hello, {session?.user?.name}</p>
           <p className='text-xl mb-6 mt-2'>What are you cooking today?</p>
-          <FilterForm />
+          <SearchComponent />
         </div>
         <Image
           className='rounded-full lg:me-12 mt-10'

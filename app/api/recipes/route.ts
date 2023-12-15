@@ -3,7 +3,25 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import prisma from '@/lib/prisma';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const name = searchParams.get('name');
+  if (name) {
+    const recipes = await prisma.recipe.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+      },
+        select: {
+          id: true,
+          name: true,
+        },
+    });
+    return NextResponse.json(recipes);
+  }
+  // If no name parameter is provided, return all recipes
   const recipes = await prisma.recipe.findMany();
   return NextResponse.json(recipes);
 }
