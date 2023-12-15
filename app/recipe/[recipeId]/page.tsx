@@ -2,7 +2,7 @@
 
 import formatDate from '@/utils/formatDate';
 import Image from 'next/image';
-import Rating from '@/app/_components/Rating';
+import RatingView from '@/app/_components/RatingView';
 import Rate from './Rate';
 import { useEffect, useState } from 'react';
 import { fetchRecipeDetails } from '@/utils/recipe';
@@ -65,7 +65,7 @@ export default function RecipeDetails({
       </div>
       <div className='col-span-12 md:col-span-7'>
         <div className='flex justify-between items-center mb-3'>
-          <Rating value={recipe.rating} />
+          <RatingView value={recipe.rating} />
           <Rate recipeId={params.recipeId} recipeName={recipe.name} />
         </div>
         <div className='mb-6 md:mb-12'>

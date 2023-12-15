@@ -1,6 +1,6 @@
 import { Rating as MantineRating } from '@mantine/core';
 
-const Rating = ({ value }: { value: number }) => {
+const RatingView = ({ value }: { value: number }) => {
   return (
     <div className='flex items-center'>
       <p className='font-bold text-xl'>{value}</p>
@@ -15,4 +15,4 @@ const Rating = ({ value }: { value: number }) => {
   );
 };
 
-export default Rating;
+export default RatingView;
