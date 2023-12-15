@@ -9,16 +9,19 @@ datasource db {
 }
 
 model Recipe {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  steps       String[]
-  ingredients String[]
-  images      String[]
-  rating      Float?
-  author      User?    @relation(fields: [authorId], references: [id])
-  authorId    String?
-  createdAt   DateTime @default(now()) @map(name: "created_at")
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  steps        String[]
+  ingredients  String[]
+  images       String[]
+  ratings      Rating[]
+  totalRatings Int      @default(0)
+  sumRatings   Float    @default(0)
+  rating       Float    @default(0)
+  author       User?    @relation(fields: [authorId], references: [id])
+  authorId     String?
+  createdAt    DateTime @default(now()) @map(name: "created_at")
 }
 
 model User {
@@ -35,8 +38,24 @@ model User {
   recipes       Recipe[]
   account       Account[]
   session       Session[]
+  ratings        Rating[]
 
   @@map(name: "users")
+}
+
+model Rating {
+  id        String   @id @default(cuid())
+  value     Float
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  
+  @@unique([recipeId, userId])
+  @@map(name: "ratings")
 }
 
 model Account {

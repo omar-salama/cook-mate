@@ -1,8 +1,8 @@
 import formatDate from '@/utils/formatDate';
 import prisma from '@/lib/prisma';
-import { IconStar } from '@tabler/icons-react';
 import Image from 'next/image';
 import Rating from '@/app/_components/Rating';
+import Rate from './Rate';
 
 export default async function RecipeDetails({
   params,
@@ -66,11 +66,8 @@ export default async function RecipeDetails({
       </div>
       <div className='col-span-12 md:col-span-7'>
         <div className='flex justify-between items-center mb-3'>
-          <Rating value={3.5} />
-          <div className='bg-muted rounded-3xl py-1 px-6 border border-black flex'>
-            Rate&nbsp;
-            <Image src='/images/star.svg' alt='star' width={15} height={15} />
-          </div>
+          <Rating value={recipe.rating} />
+          <Rate recipeId={params.recipeId} recipeName={recipe.name} />
         </div>
         <div className='mb-6 md:mb-12'>
           <h2 className='font-bold text-xl md:text-3xl'>{recipe.name}</h2>
