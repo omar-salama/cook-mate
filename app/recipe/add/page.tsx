@@ -70,7 +70,8 @@ const RecipeForm = () => {
             ...values,
           });
           if (res.ok) {
-            router.push('/');
+            const json = await res.json();
+            router.push(`/recipe/${json.post.id}`);
           }
           setLoading(false);
         }}
