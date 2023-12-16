@@ -1,28 +1,28 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Grid,
-  Loader,
-} from '@mantine/core';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { Grid, Loader } from '@mantine/core';
+import { fetchRecipes } from '../utils/recipe';
 import Tabs from './_components/Home/Tabs';
 import RecipeCard from './_components/Home/RecipeCard';
-import { fetchRecipes } from '../utils/recipe';
-import { useSession } from "next-auth/react";
 import SearchComponent from './_components/Home/Search';
+import OrderByCombobox from './_components/Home/OrderByCombobox';
+
+const orderByOptions = ['createdAt', 'rating'];
 
 export default function Home() {
   const [recipes, setRecipes] = useState<IRecipe[] | null>(null);
+  const [orderBy, setOrderBy] = useState(orderByOptions[0]);
   const { data: session } = useSession();
 
   useEffect(() => {
-    async function fetchRecipeData() {
-      const data = await fetchRecipes();
+    (async () => {
+      const data = await fetchRecipes(orderBy);
       setRecipes(data);
-    }
-    fetchRecipeData();
-  }, []);
+    })();
+  }, [orderBy]);
 
   return (
     <>
@@ -45,6 +45,11 @@ export default function Home() {
       {/* filteration */}
       <section className='mt-12 flex justify-between'>
         <Tabs></Tabs>
+        <OrderByCombobox
+          options={orderByOptions}
+          value={orderBy}
+          onChange={setOrderBy}
+        />
       </section>
       {/* recipe cards */}
       <section className='mt-36'>

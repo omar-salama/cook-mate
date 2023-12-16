@@ -1,5 +1,5 @@
-export async function fetchRecipes() {
-  const response = await fetch('/api/recipes');
+export async function fetchRecipes(orderBy: string) {
+  const response = await fetch(`/api/recipes?orderBy=${orderBy}`);
   const recipes = await response.json();
   return recipes;
 }

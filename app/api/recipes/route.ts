@@ -6,6 +6,8 @@ import prisma from '@/lib/prisma';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const name = searchParams.get('name');
+  const orderBy = searchParams.get('orderBy');
+  // for searching
   if (name) {
     const recipes = await prisma.recipe.findMany({
       where: {
@@ -14,16 +16,21 @@ export async function GET(request: Request) {
           mode: 'insensitive',
         },
       },
-        select: {
-          id: true,
-          name: true,
-        },
+      select: {
+        id: true,
+        name: true,
+      },
     });
     return NextResponse.json(recipes);
   }
-  // If no name parameter is provided, return all recipes
-  const recipes = await prisma.recipe.findMany();
-  return NextResponse.json(recipes);
+  if (orderBy) {
+    const recipes = await prisma.recipe.findMany({
+      orderBy: {
+        [orderBy]: 'desc',
+      },
+    });
+    return NextResponse.json(recipes);
+  }
 }
 
 export async function POST(request: Request) {
