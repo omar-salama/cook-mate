@@ -6,6 +6,7 @@ import RatingView from '@/app/_components/RatingView';
 import Rate from './Rate';
 import { useEffect, useState } from 'react';
 import { fetchRecipeDetails } from '@/utils/recipe';
+import samosa from '@/public/images/samosa.png';
 
 export default function RecipeDetails({
   params,
@@ -21,14 +22,6 @@ export default function RecipeDetails({
     fetchRecipeData();
   }, [params.recipeId]);
 
-  const images = [
-    '/images/samosa.svg',
-    '/images/samosa.svg',
-    '/images/samosa.svg',
-    '/images/samosa.svg',
-    '/images/samosa.svg',
-  ];
-
   if (!recipe) return;
   return (
     <div className='grid grid-cols-12 gap-5 md:gap-10'>
@@ -39,23 +32,27 @@ export default function RecipeDetails({
           <div className='col-span-6'>
             <Image
               className='w-full h-full max-h-[19rem] object-cover rounded-2xl'
-              src={images[0]}
+              src={samosa}
               alt='recipe image'
               height={200}
               width={200}
+              priority={false}
+              placeholder='blur'
             />
           </div>
           {/* nested Grid for the second half */}
           <div className='col-span-6'>
             <div className='grid grid-cols-12 gap-1 md:gap-4'>
-              {images.slice(1).map((item, idx) => (
+              {[0, 1, 2, 3].map((item, idx) => (
                 <div key={idx} className='col-span-6'>
                   <Image
                     className='w-full h-full max-h-36 object-cover rounded-2xl'
-                    src={item}
+                    src={samosa}
                     alt='recipe image'
                     height={200}
                     width={200}
+                    priority={false}
+                    placeholder='blur'
                   />
                 </div>
               ))}

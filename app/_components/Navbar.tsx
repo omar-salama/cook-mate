@@ -17,6 +17,7 @@ export default function Navbar() {
           alt='CookMate Logo'
           width={200}
           height={42}
+          priority={true}
         />
       </Link>
       {!isAuth && (
