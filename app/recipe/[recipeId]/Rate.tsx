@@ -86,7 +86,7 @@ const Rate = ({
       >
         Rate
         <Image
-          src='/images/star.svg'
+          src='/icons/star.svg'
           alt='star icon'
           width={18}
           height={18}

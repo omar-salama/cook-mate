@@ -39,6 +39,7 @@ export default function Home() {
           alt='dish'
           width={430}
           height={430}
+          priority={false}
         ></Image>
       </section>
       {/* filteration */}

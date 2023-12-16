@@ -13,11 +13,12 @@ export default function RecipeCard({ recipe }: { recipe: IRecipe }) {
             height={180}
             width={180}
             alt='Recipe Dish'
+            priority={false}
           />
           <div className='absolute top-1/2 right-4 transform -translate-y-11 bg-[#FDEED9] rounded-full py-1.5 px-2.5'>
             <span className='font-semibold flex items-center'>
               <Image
-                src='/images/star-filled.svg'
+                src='/icons/star-filled.svg'
                 alt='star icon'
                 width={18}
                 height={18}
