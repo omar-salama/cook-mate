@@ -18,7 +18,7 @@ export default function LoginPage() {
       <Grid.Col
         span={{ base: 12, md: 6 }}
         offset={2}
-        className='invisible md:visible'
+        className='hidden md:block'
       >
         <Image
           className='ms-auto'

@@ -31,7 +31,7 @@ export default function Navbar() {
           {!isAddPath && (
             <li className='ms-3 sm:mt-0 mt-3'>
               <Link
-                className='bg-secondary hover:bg-secondary/[.9] text-white rounded-full py-3 px-1 sm:px-6'
+                className='bg-secondary hover:bg-secondary/[.9] text-white rounded-full py-3 px-4 sm:px-6 text-xs sm:text-sm'
                 href={session ? '/recipe/add' : '/login'}
               >
                 {session ? 'Add New Recipe' : 'Login'}

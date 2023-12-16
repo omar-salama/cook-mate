@@ -47,7 +47,7 @@ const SecondStepForm = ({ loading = false }) => {
           <MainSubmitButton label='Save' loading={loading} />
         </Grid.Col>
       </Grid.Col>
-      <Grid.Col span={6} className='invisible md:visible'>
+      <Grid.Col span={6} className='hidden md:block'>
         <div className='flex justify-center'>
           <Image
             src='/images/chars.svg'
