@@ -8,12 +8,13 @@ import Image from 'next/image';
 const Rate = ({
   recipeId,
   recipeName,
+  handleRateChange,
 }: {
   recipeId: string;
   recipeName: string;
+  handleRateChange: (isChanged: boolean) => void;
 }) => {
   const { data: session } = useSession();
-  const [rating, setRating] = useState(0);
   const [userRating, setUserRating] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isOpen, { open: openModel, close: closeModel }] = useDisclosure();
@@ -24,7 +25,7 @@ const Rate = ({
   }, []);
 
   const handleRatingChange = (newRating: number) => {
-    setRating(newRating);
+    setUserRating(newRating);
     submitRating(recipeId, session?.user?.id, newRating);
   };
 
@@ -62,9 +63,10 @@ const Rate = ({
       });
 
       if (response.ok) {
-        closeModel();
         setLoading(false);
-        fetchUserRating();
+        closeModel();
+        setUserRating(value);
+        handleRateChange(true);
       } else {
         setLoading(false);
         console.error(

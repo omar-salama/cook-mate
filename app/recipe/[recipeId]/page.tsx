@@ -14,13 +14,14 @@ export default function RecipeDetails({
   params: { recipeId: string };
 }) {
   const [recipe, setRecipe] = useState<IRecipe>();
+  const [isUserRateChanged, setIsUserRateChanged] = useState(false)
   useEffect(() => {
     async function fetchRecipeData() {
       const data = await fetchRecipeDetails(params.recipeId);
       setRecipe(data);
     }
     fetchRecipeData();
-  }, [params.recipeId]);
+  }, [params.recipeId, isUserRateChanged]);
 
   if (!recipe) return;
   return (
@@ -63,7 +64,7 @@ export default function RecipeDetails({
       <div className='col-span-12 md:col-span-7'>
         <div className='flex justify-between items-center mb-3'>
           <RatingView value={recipe.rating} />
-          <Rate recipeId={params.recipeId} recipeName={recipe.name} />
+          <Rate recipeId={params.recipeId} recipeName={recipe.name} handleRateChange={setIsUserRateChanged} />
         </div>
         <div className='mb-6 md:mb-12'>
           <h2 className='font-bold text-xl md:text-3xl'>{recipe.name}</h2>
