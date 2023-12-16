@@ -12,7 +12,6 @@ You can share you favourite recipes with other foodies, search for specific reci
 - Tailwind CSS
 
 ## To Be Implemented
-- OAuth.
 - Image uploading, to share how your final dish would look like! Currently there is dummy UI for it, but it's not functional.
 - Unit testing.
 
