@@ -1,16 +1,26 @@
 import { compare } from 'bcryptjs';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import prisma from './prisma';
 
 export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   session: {
     strategy: 'jwt',
   },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
+    }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
     CredentialsProvider({
       id: 'email-login',
       name: 'email',
@@ -70,5 +80,5 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
 };
