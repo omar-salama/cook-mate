@@ -77,9 +77,9 @@ const Rate = ({
       console.error('Error submitting rating:', error);
     }
   };
-
+  if (!session) return null;
   return (
-    {session && session.user && session.user.id && <>
+    <>
       <div
         className='bg-muted rounded-3xl py-1 px-6 border border-black hover:bg-orangeMuted hover:cursor-pointer flex'
         onClick={openModel}
@@ -114,10 +114,10 @@ const Rate = ({
             readOnly={loading}
             value={userRating}
           />
-          {loading && <Loader color='main' size='sm' />}
+          {<Loader color='main' size='sm' />}
         </div>
       </Modal>
-    </>}
+    </>
   );
 };
 
