@@ -29,7 +29,7 @@ export default function RegisterFrom() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const callbackUrl = searchParams.get('callbackUrl') || '/recipe/add';
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
 
   const initialValues: FormData = {
     name: '',
