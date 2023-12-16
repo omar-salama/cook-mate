@@ -32,7 +32,7 @@ export default function Navbar() {
             <li className='ms-3 sm:mt-0 mt-3'>
               <Link
                 className='bg-secondary hover:bg-secondary/[.9] text-white rounded-full py-3 px-1 sm:px-6'
-                href={session ? '/recipe/new' : '/login'}
+                href={session ? '/recipe/add' : '/login'}
               >
                 {session ? 'Add New Recipe' : 'Login'}
               </Link>
