@@ -11,10 +11,6 @@ You can share you favourite recipes with other foodies, search for specific reci
 - Prisma ORM
 - Tailwind CSS
 
-## Caveats
-- At the moment there is no UI for loggin out so you would have to go to `http://localhost:3000/api/auth/signout` to log out.
-- To go to the login page you will have to click on Create New Recipe at the top right corner.
-
 ## To Be Implemented
 - OAuth.
 - Image uploading, to share how your final dish would look like! Currently there is dummy UI for it, but it's not functional.
