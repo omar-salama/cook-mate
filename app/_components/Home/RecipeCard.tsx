@@ -5,17 +5,18 @@ import Link from 'next/link';
 export default function RecipeCard({ recipe }: { recipe: IRecipe }) {
   return (
     <Link href={`/recipe/${recipe.id}`}>
-      <div className='relative w-4/5 sm:w-full mx-auto mb-20'>
+      <div className='relative w-4/5 sm:w-full mx-auto mb-24'>
         <div className='w-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
           <Image
             className='rounded-full mx-auto'
             src='/images/dish.png'
-            height={180}
-            width={180}
+            height={220}
+            width={220}
             alt='Recipe Dish'
             priority={false}
           />
-          <div className='absolute top-1/2 right-4 transform -translate-y-11 bg-[#FDEED9] rounded-full py-1.5 px-2.5'>
+          {/* rating badge */}
+          <div className='absolute top-1/2 right-0 transform -translate-y-11 bg-[#FDEED9] rounded-full py-1.5 px-2.5'>
             <span className='font-semibold flex items-center'>
               <Image
                 src='/icons/star-filled.svg'
